@@ -6,13 +6,13 @@ const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 
 require("./models/User");
-require('./models/Survey');
+require("./models/Survey");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
 const app = express();
-require('./services/passport');
+require("./services/passport");
 app.use(bodyParser.json());
 app.use(
   cookieSession({
@@ -24,8 +24,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./routes/authRoutes")(app);
-require('./routes/billingRoutes')(app);
-require('./routes/surveyRoutes')(app);
+require("./routes/billingRoutes")(app);
+require("./routes/surveyRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
